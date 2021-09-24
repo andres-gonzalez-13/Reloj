@@ -1,6 +1,5 @@
 const path = require('path');
 const express = require('express');
-const clock = require('clock');
 const app = express();
 const port = 3000
 
