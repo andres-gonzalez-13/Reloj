@@ -1,6 +1,9 @@
 //colocar una direccion si se esta en otro PC
 const socketClient = io();
 
+//const { Worker } = require('worker_threads');
+
+
 let btn = document.getElementById('send');
 let output = document.getElementById('output');
 let actions = document.getElementById('actions');
@@ -16,9 +19,19 @@ var vetMinutes = 0;
 var newHours = 0;
 var newMinutes = 0;
 
-setInterval(function(){
-    console.log('test');
-}, 60 * 60 * 1000);
+function refreshClock(){
+    datenow = new Date();
+    var restH = datenow.getHours() - vetHours;
+    var restM = datenow.getMinutes() - vetMinutes;
+    datenow.setHours(restH);
+    datenow.setMinutes(restM);
+    socketClient.emit('time:output', {
+        hours: datenow.getHours(),
+        minutes: datenow.getMinutes(),
+        seconds: datenow.getSeconds()
+    });
+    setTimeout(refreshClock, 1000);
+}
 
 btn.addEventListener('click', function (){
     datenow = new Date();
@@ -27,10 +40,8 @@ btn.addEventListener('click', function (){
     vetMinutes = 0;
     newHours = newtime.split(":")[0];
     newMinutes = newtime.split(":")[1];
-
     vetHours = datenow.getHours() - newHours;
     vetMinutes = datenow.getMinutes() - newMinutes;
-
     var restH = datenow.getHours() - vetHours;
     var restM = datenow.getMinutes() - vetMinutes;
     datenow.setHours(restH);
@@ -46,6 +57,8 @@ btn.addEventListener('click', function (){
         username: 'cambio de hora',
         message: '----' + datenow + '-----'
     });
+
+    refreshClock();
 });
 
 
