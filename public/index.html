@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Reloj</title>
+        <link rel="stylesheet" href="main.css">
+    </head>
+    <body>
+        <div id="chat-container">
+            <input type="time" id = "timeHour" name = "timeHour" 
+            value="13:30" min = "00:01" max = "23:59" required>
+            <button id="send">Asignar nueva hora</button>
+            <div id="chat-window">
+                <div id="timeScreen"></div>
+                <div id="output"></div>
+                <div id="actions"></div>
+            </div>
+        </div>
+        <script src="/socket.io/socket.io.js" charset="UTF-8"></script>
+        <script src="chat.js" charset="UTF-8"></script>
+    </body>
+</html>
