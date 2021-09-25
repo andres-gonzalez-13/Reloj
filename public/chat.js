@@ -57,7 +57,7 @@ btn.addEventListener('click', function (){
         username: 'cambio de hora',
         message: '----' + datenow + '-----'
     });
-
+    clearTimeout(refreshClock);
     refreshClock();
 });
 
